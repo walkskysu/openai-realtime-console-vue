@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "relay": "nodemon ./relay-server/index.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
@@ -15,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@openai/realtime-api-beta": "github:openai/openai-realtime-api-beta",
+    "dotenv": "^16.4.7",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -22,6 +24,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "leaflet": "^1.9.4",
+    "nodemon": "^3.1.7",
     "sass": "^1.82.0",
     "typescript": "~5.6.2",
     "vite": "^6.0.1",
