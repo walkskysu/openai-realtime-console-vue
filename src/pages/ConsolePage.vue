@@ -325,6 +325,7 @@ onMounted(() => {
   const wavStreamPlayer = wavStreamPlayerRef.value
   // Set instructions and transcription
   client.updateSession({ instructions: instructions.value });
+  client.updateSession({ voice: "sage" });
   client.updateSession({ input_audio_transcription: { model: 'whisper-1' } });
 
   // Add tools
