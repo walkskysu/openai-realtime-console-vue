@@ -65,8 +65,6 @@ export default defineComponent({
       const leftEl = leftRef.value
       const rightEl = rightRef.value
       const bgEl = bgRef.value
-      console.log('here')
-      console.log(leftEl, rightEl, bgEl)
 
       if (leftEl && rightEl && bgEl) {
         if (value.value) {
