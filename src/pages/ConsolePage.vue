@@ -444,34 +444,39 @@ onUnmounted(() => {
 });
 
 const connectConversation = async () => {
-  const client = clientRef.value;
-  const wavRecorder = wavRecorderRef.value;
-  const wavStreamPlayer = wavStreamPlayerRef.value;
+  try {
+    const client = clientRef.value;
+    const wavRecorder = wavRecorderRef.value;
+    const wavStreamPlayer = wavStreamPlayerRef.value;
 
-  // Set state variables
-  startTimeRef.value = new Date().toISOString();
-  isConnected.value = true;
-  realtimeEvents.value = [];
-  items.value = client.conversation.getItems();
+    // Set state variables
+    startTimeRef.value = new Date().toISOString();
+    isConnected.value = true;
+    realtimeEvents.value = [];
+    items.value = client.conversation.getItems();
 
-  // Connect to microphone
-  await wavRecorder.begin();
+    // Connect to microphone
+    await wavRecorder.begin();
 
-  // Connect to audio output
-  await wavStreamPlayer.connect();
+    // Connect to audio output
+    await wavStreamPlayer.connect();
 
-  // Connect to realtime API
-  await client.connect();
-  client.sendUserMessageContent([
-    {
-      type: `input_text`,
-      text: `Hello!`,
-      // text: `For testing purposes, I want you to list ten car brands. Number each item, e.g. "one (or whatever number you are one): the item name".`
-    },
-  ]);
+    // Connect to realtime API
+    await client.connect();
+    client.sendUserMessageContent([
+      {
+        type: `input_text`,
+        text: `Hello!`,
+        // text: `For testing purposes, I want you to list ten car brands. Number each item, e.g. "one (or whatever number you are one): the item name".`
+      },
+    ]);
 
-  if (client.getTurnDetectionType() === 'server_vad') {
-    await wavRecorder.record((data: any) => client.appendInputAudio(data.mono));
+    if (client.getTurnDetectionType() === 'server_vad') {
+      await wavRecorder.record((data: any) => client.appendInputAudio(data.mono));
+    }
+  } catch (error) {
+    alert(`Error: ${error.message}`);
+    isConnected.value = false;
   }
 };
 
